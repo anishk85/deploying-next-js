@@ -8,7 +8,8 @@ export default clerkMiddleware(async (auth, req) => {
   const { userId, sessionClaims, redirectToSignIn } = await auth();
 //   console.log("Session Claims:", sessionClaims);
 
-  const userRole = sessionClaims?.publicMetadata?.role;
+  const userRole =(sessionClaims?.publicMetadata as { role?: string })?.role;
+
 //   console.log("user role",userRole); // 👈 fetch from metadata
 
   // Check if the user is trying to access an admin route

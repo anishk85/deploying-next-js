@@ -10,7 +10,7 @@ export async function setRole(formData: FormData) {
   // Check that the user trying to set the role is an admin
 //   console.log("##############################");
 //   console.log("Session Claims:", sessionClaims);
-  if (sessionClaims?.publicMetadata?.role !== "admin") {
+  if ((sessionClaims?.publicMetadata as { role?: string })?.role !== "admin") {
     throw new Error("Not Authorized");
   }
 
@@ -31,7 +31,7 @@ export async function setRole(formData: FormData) {
 export async function removeRole(formData: FormData) {
   const { sessionClaims } = await auth();
 
-  if (sessionClaims?.publicMetadata?.role !== "admin") {
+  if ((sessionClaims?.publicMetadata as { role?: string })?.role !== "admin") {
     throw new Error("Not Authorized");
   }
 
